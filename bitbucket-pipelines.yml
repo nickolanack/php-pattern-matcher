@@ -1,0 +1,19 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: phpunit/phpunit:5.0.3
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - composer install
+          
+          - composer require phpmd/phpmd
+          - composer require squizlabs/php_codesniffer
+            
+          - phpunit test --verbose
+           # - ./vendor/bin/phpcs -h
+          - ./vendor/bin/phpmd . text codesize,unusedcode,naming,cleancode,design --exclude vendor

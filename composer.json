@@ -1,0 +1,16 @@
+{
+    "name": "nickola/php-pattern-matcher",
+    "description": "a string pattern matcher",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nickolanack",
+            "email": "nickblackwell82@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": { "nickola\\": "src/" }
+    }
+}
