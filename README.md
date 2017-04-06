@@ -4,6 +4,7 @@ A very simple generic pattern matcher for strings
 
 ```php
 
+include_once __DIR__ . '/vendor/autoload.php';
 
 (new nickola\StringPattern('127.0.0.1 - - [23/Nov/2016:10:08:40 -0800] "GET /crossdomain.xml HTTP/1.1" 404 213'))
 
