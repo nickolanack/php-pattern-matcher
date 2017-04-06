@@ -1,5 +1,5 @@
 # php-pattern-matcher
-A really simple pattern matcher for strings
+A very simple generic pattern matcher for strings
 
 
 ```php
