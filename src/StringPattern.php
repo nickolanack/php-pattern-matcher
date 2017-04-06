@@ -60,12 +60,18 @@ class StringPattern {
 
 		$patterns = $patterns[0];
 		$regex = '';
+
+
+		if(empty($patterns)){
+			return $pattern===$this->string;
+		}
+
 		foreach ($patterns as $variable) {
 			//$regex=str_replace($variable[0], '(.+)', $regex);
 			$parts = explode($variable, $match);
 			$prefix = $parts[0];
 			if (!empty($prefix)) {
-				$regex .= '(?:' . preg_quote($prefix) . ')';
+				$regex .= '(?:' . preg_quote($prefix,'/') . ')';
 			}
 			$regex .= '(.+?)';
 
@@ -73,7 +79,7 @@ class StringPattern {
 
 		}
 		if (!empty($match)) {
-			$regex .= '(?:' . preg_quote($match) . ')';
+			$regex .= '(?:' . preg_quote($match,'/') . ')';
 		}
 
 		$regex = '/^' . $regex . '$/';

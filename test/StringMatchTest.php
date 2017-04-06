@@ -111,4 +111,38 @@ class StringMatchTest extends PHPUnit_Framework_TestCase {
 
 	}
 
+
+	public function testMultiEntryString() {
+
+		foreach([
+			'/',
+			'/home',
+			'/item/5'
+		] as $path){
+
+			(new nickola\StringPattern($path))
+
+				->match('/', function () {
+
+
+				})
+				->match('/item/{pageNumber}', function ($pageNumber) {
+
+					$this->assertEquals('5', $pageNumber);
+
+				})
+				->match('/{page}', function ($page) {
+
+					$this->assertEquals('home', $page);
+
+				})
+				->otherwise(function(){
+
+					$this->fail('Expected a match');
+
+				});
+		}
+
+	}
+
 }

@@ -2,6 +2,7 @@
 A very simple generic pattern matcher for strings
 
 
+Simple usage
 ```php
 
 include_once __DIR__ . '/vendor/autoload.php';
@@ -16,7 +17,53 @@ include_once __DIR__ . '/vendor/autoload.php';
 		//$this->assertEquals('404', $status);
 		//$this->assertEquals('213', $bytes);
 
-	})->run();
+	})
+	->run(); //process template string
 
+
+```
+
+An exception would be thrown (above) if the input string could not be mapped to the template. 
+
+
+Multiple templates, and handle unmatched 
+```php
+
+
+include_once __DIR__ . '/vendor/autoload.php';
+
+foreach([
+	'/',
+	'/home',
+	'/item/5'
+] as $path){
+
+	(new nickola\StringPattern($path))
+
+		->match('/', function () {
+
+			// if template has no variables then an exact match is required
+
+		})
+		->match('/item/{pageNumber}', function ($pageNumber) {
+
+			// the first template that matches, ends the process - notice that the next section 
+			// would also work for `/item/5`, so ordering is important...
+			// $this->assertEquals('5', $pageNumber);
+
+		})
+		->match('/{page}', function ($page) {
+
+			//$this->assertEquals('home', $page);
+
+		})
+		->otherwise(function(){
+
+			// if no match is found this method is called 
+			// the run() method is automatically called
+			//$this->fail('Expected a match');
+
+		});
+}
 
 ```
