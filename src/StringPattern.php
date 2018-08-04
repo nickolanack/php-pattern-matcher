@@ -5,6 +5,7 @@ namespace nickola;
 class StringPattern {
 
 	protected $string;
+	protected $result;
 	protected $handlers = array();
 	protected $otherwise = false;
 
@@ -35,7 +36,7 @@ class StringPattern {
 		foreach ($this->handlers as $handler) {
 
 			if ($this->checkHandler($handler[0], $handler[1])) {
-				return;
+				return $this->result;
 			}
 
 		}
@@ -93,8 +94,7 @@ class StringPattern {
 
 		if (count($patterns) === count($arguments)) {
 
-			call_user_func_array($callback, $arguments);
-
+			$this->result=call_user_func_array($callback, $arguments);
 			return true;
 
 		}
