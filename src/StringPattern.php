@@ -44,8 +44,7 @@ class StringPattern {
 		if ($this->otherwise) {
 
 			$otherwise = $this->otherwise;
-			$otherwise($this->string);
-			return;
+			return $otherwise($this->string);
 
 		}
 
